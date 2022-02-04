@@ -1,3 +1,6 @@
+# This is old loqui code using iced before the rewrite with egui
+# It is NOT maintained, however if you do want to pick it up, you can reach us
+
 <img align="left" src="./resources/loqui.svg" width="150"/>
 <h1 align="left" style="font-weight: bold;">Loqui</h1>
 
