@@ -16,36 +16,6 @@
       outputs = inputs.nixCargoIntegration.lib.makeOutputs {
         root = ./.;
         overrides = {
-          pkgs = common: prev: {
-            overlays = prev.overlays ++ [
-              (final: prev: {
-                mold = prev.stdenv.mkDerivation {
-                  pname = "mold";
-                  version = "master";
-
-                  stdenv = prev.llvmPackages_12.stdenv;
-
-                  dontUseCmakeConfigure = true;
-
-                  buildInputs = with prev; [ openssl.dev zlib.dev xxHash.dev tbb ];
-                  nativeBuildInputs = [ prev.cmake prev.clang_12 ];
-
-                  src = prev.fetchgit {
-                    url = "https://github.com/rui314/mold.git";
-                    rev = "72cea9a0bfcdee7cb17cc34bed9aacdea2f80adf";
-                    fetchSubmodules = true;
-                    sha256 = "sha256-ocug5DAPq7LU8HH6yHQI3FhW8XF4H31krmr6ttJ9V9k=";
-                  };
-
-                  buildPhase = "make";
-                  installPhase = ''
-                    mkdir -p $out/bin
-                    install -m 755 mold-wrapper.so mold $out/bin
-                  '';
-                };
-              })
-            ];
-          };
           shell = common: prev: {
             packages = prev.packages ++ [ common.pkgs.mold ];
             env = prev.env ++ [
