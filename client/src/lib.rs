@@ -105,6 +105,7 @@ impl From<Session> for InnerSession {
         InnerSession {
             user_id: session.user_id.parse().unwrap(),
             session_token: session.session_token.into(),
+            guest_token: None,
         }
     }
 }
@@ -705,6 +706,7 @@ impl Client {
                     new_avatar,
                     new_status,
                     new_is_bot,
+                    ..
                 }) => {
                     let member = self.members.entry(user_id).or_default();
                     if let Some(new_username) = new_username {

@@ -495,6 +495,7 @@ impl ScreenManager {
                                 new_status: Some(profile.user_status),
                                 new_username: Some(profile.user_name),
                                 new_is_bot: Some(profile.is_bot),
+                                new_account_kind: None,
                             }))]
                         })
                     },
@@ -749,9 +750,8 @@ impl Application for ScreenManager {
                     self.socket_reset
                         .and_do(|| {
                             let client = self.client.as_ref().unwrap();
-                            let sources = client.subscribe_to();
                             cmds.push(client.mk_cmd(
-                                |inner| async move { inner.subscribe_events(sources).await },
+                                |inner| async move { inner.subscribe_events(false).await },
                                 |socket| {
                                     let (tx, rx) = socket.split();
                                     Message::SocketEvent {
@@ -790,9 +790,8 @@ impl Application for ScreenManager {
                 self.screens.push(Screen::Main(Box::new(MainScreen::default())));
 
                 let client = self.client.as_mut().unwrap();
-                let sources = client.subscribe_to();
                 let ws_cmd = client.mk_cmd(
-                    |inner| async move { inner.subscribe_events(sources).await },
+                    |inner| async move { inner.subscribe_events(false).await },
                     |socket| {
                         let (tx, rx) = socket.split();
                         Message::SocketEvent {
@@ -828,6 +827,7 @@ impl Application for ScreenManager {
                             new_avatar: self_profile.user_avatar,
                             new_status: Some(UserStatus::Online.into()),
                             new_username: Some(self_profile.user_name),
+                            new_account_kind: None,
                             user_id: self_id,
                         })));
                         events.extend(inner.call(GetEmotePacksRequest::new()).await.map(|resp| {
@@ -962,6 +962,7 @@ impl Application for ScreenManager {
                                                     new_status: Some(profile.user_status),
                                                     new_username: Some(profile.user_name),
                                                     new_is_bot: Some(profile.is_bot),
+                                                    new_account_kind: None,
                                                 })))
                                             })
                                             .collect()
@@ -1419,7 +1420,16 @@ pub fn sub_escape_pop_screen() -> Subscription<Message> {
 
 // scale down resolution while preserving ratio
 pub fn scale_down(w: u32, h: u32, max_size: u32) -> (u32, u32) {
+    if w == 0 || h == 0 {
+        return (1, 1);
+    }
+
     let ratio = w / h;
+
+    if ratio == 0 {
+        return (1, 1);
+    }
+
     let new_w = max_size;
     let new_h = max_size / ratio;
     (new_w, new_h)
