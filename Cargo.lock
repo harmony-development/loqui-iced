@@ -1402,7 +1402,7 @@ dependencies = [
 [[package]]
 name = "harmony_build"
 version = "0.1.0"
-source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#53ccf9b71bfe79e96428523ffcfefa816d8ca625"
+source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#87da910451354c87230d675353ffc1d9af3ff5ac"
 dependencies = [
  "hrpc-build",
  "prost-build",
@@ -1413,7 +1413,7 @@ dependencies = [
 [[package]]
 name = "harmony_derive"
 version = "0.1.3"
-source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#53ccf9b71bfe79e96428523ffcfefa816d8ca625"
+source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#87da910451354c87230d675353ffc1d9af3ff5ac"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1423,7 +1423,7 @@ dependencies = [
 [[package]]
 name = "harmony_rust_sdk"
 version = "0.8.0"
-source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#53ccf9b71bfe79e96428523ffcfefa816d8ca625"
+source = "git+https://github.com/harmony-development/harmony_rust_sdk.git?branch=master#87da910451354c87230d675353ffc1d9af3ff5ac"
 dependencies = [
  "derive-new",
  "derive_more",
@@ -1436,7 +1436,6 @@ dependencies = [
  "serde",
  "tokio",
  "tracing",
- "urlencoding",
 ]
 
 [[package]]
@@ -3764,7 +3763,7 @@ version = "1.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4ee73e6e4924fe940354b8d4d98cad5231175d615cd855b758adc658c0aac6a0"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if 0.1.10",
  "rand",
  "static_assertions",
 ]
