@@ -53,7 +53,7 @@ hex_color = "1"
 
 open = "2.0.0"
 rfd = "0.6"
-image = "0.23"
+image = "0.24"
 
 tokio = { version = "1.9", features = ["rt-multi-thread", "parking_lot", "time", "fs", "macros"] }
 
