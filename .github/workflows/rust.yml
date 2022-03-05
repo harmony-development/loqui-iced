@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     
     - name: Install tagref
       run: curl -L https://github.com/stepchowfun/tagref/releases/download/v1.5.0/tagref-x86_64-unknown-linux-gnu > tagref && chmod +x tagref
@@ -42,7 +42,7 @@ jobs:
     needs: tagref
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       if: ${{ matrix.os == 'ubuntu-latest' }}
