@@ -59,7 +59,7 @@ jobs:
         components: rustfmt,clippy
 
     - name: Cache rust
-      uses: Swatinem/rust-cache@v1
+      uses: Swatinem/rust-cache@v2
 
     - name: Clippy
       uses: actions-rs/clippy-check@v1
